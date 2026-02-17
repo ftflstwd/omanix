@@ -15,7 +15,7 @@ in
     # are defined in rules.nix and bindings.nix respectively.
     # This option covers everything else (general, dwindle, decoration, etc.)
     type = lib.types.attrs;
-    default = {};
+    default = { };
     description = ''
       Extra Hyprland settings to merge with the Omanix defaults.
       These are passed directly to wayland.windowManager.hyprland.settings
@@ -46,8 +46,7 @@ in
           force_zero_scaling = true;
         };
 
-        monitor = ",highres,auto,${toString cfg.monitor.scale}";
-
+        monitor = lib.mkDefault ",highres,auto,${toString cfg.monitor.scale}";
         general = {
           gaps_in = cfg.hyprland.gaps.inner;
           gaps_out = cfg.hyprland.gaps.outer;
