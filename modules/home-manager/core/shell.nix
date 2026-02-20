@@ -114,5 +114,6 @@
     fzf
     zsh-completions
     _7zz
+    file
   ];
 }
