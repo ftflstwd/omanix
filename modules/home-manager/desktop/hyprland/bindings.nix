@@ -7,7 +7,7 @@ in
   options.omanix.hyprland = {
     extraBindings = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = ''
         Extra key bindings (bindd format) appended to the Omanix defaults.
 
@@ -21,7 +21,7 @@ in
 
     extraBinds = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = ''
         Extra simple binds (bind format, no description) appended to the defaults.
 
@@ -34,7 +34,7 @@ in
 
     extraMouseBindings = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = ''
         Extra mouse bindings appended to the Omanix defaults.
 
@@ -47,7 +47,7 @@ in
 
     extraMediaBindings = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = ''
         Extra repeat+description bindings (binddel format) appended to defaults.
       '';
@@ -55,7 +55,7 @@ in
 
     extraLockedBindings = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = ''
         Extra locked+description bindings (binddl format) appended to defaults.
       '';
@@ -263,7 +263,7 @@ in
       ++ (
         if cfg.apps.spotatui.enable then
           [
-            "$mainMod SHIFT, M, Open Music Player, exec, omanix-launch-tui-spotatui"
+            "$mainMod SHIFT, M, Open Music Player, exec, omanix-launch-or-focus-tui spotatui"
           ]
         else
           [ ]
@@ -283,7 +283,8 @@ in
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
-      ] ++ cfg.hyprland.extraMouseBindings;
+      ]
+      ++ cfg.hyprland.extraMouseBindings;
 
       # ═══════════════════════════════════════════════════════════════════
       # Media keys with repeat + descriptions (binddel)
@@ -299,7 +300,8 @@ in
         "ALT, XF86AudioLowerVolume, Volume Down (Fine), exec, ${osdClient} --output-volume -1"
         "ALT, XF86MonBrightnessUp, Brightness Up (Fine), exec, ${osdClient} --brightness +1"
         "ALT, XF86MonBrightnessDown, Brightness Down (Fine), exec, ${osdClient} --brightness -1"
-      ] ++ cfg.hyprland.extraMediaBindings;
+      ]
+      ++ cfg.hyprland.extraMediaBindings;
 
       # ═══════════════════════════════════════════════════════════════════
       # Media keys locked + descriptions (binddl)
@@ -311,7 +313,8 @@ in
         ", XF86AudioPrev, Previous Track, exec, ${osdClient} --playerctl previous"
         "$mainMod, XF86AudioMute, Switch Audio Output, exec, omanix-cmd-audio-switch"
         ", XF86PowerOff, Power Menu, exec, omanix-menu system"
-      ] ++ cfg.hyprland.extraLockedBindings;
+      ]
+      ++ cfg.hyprland.extraLockedBindings;
     };
   };
 }
