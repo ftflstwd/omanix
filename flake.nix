@@ -50,7 +50,6 @@
       ...
     }@inputs:
     let
-      system = "x86_64-linux";
       omanixLib = import ./lib { inherit (nixpkgs) lib; };
     in
     {
@@ -101,40 +100,8 @@
             walker.homeManagerModules.default
           ];
 
-          # Pass dependencies to all child modules
           _module.args.omanixLib = omanixLib;
           _module.args.inputs = inputs;
         };
-
-      # ═══════════════════════════════════════════════════════════════════
-      # Development/testing configuration (temporary)
-      # ═══════════════════════════════════════════════════════════════════
-      nixosConfigurations.omanix-dev = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./tests/dev-machine.nix
-          self.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
-              users.dev = {
-                imports = [ self.homeManagerModules.default ];
-                home.username = "dev";
-                home.homeDirectory = "/home/dev";
-                home.stateVersion = "24.11";
-
-                omanix.user = {
-                  name = "Dev User";
-                  email = "dev@example.com";
-                };
-              };
-            };
-          }
-        ];
-      };
     };
 }
