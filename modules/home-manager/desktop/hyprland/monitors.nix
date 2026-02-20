@@ -3,19 +3,24 @@ let
   cfg = config.omanix;
 
   workspaceRules = lib.flatten (
-    lib.imap0 (idx: mon:
+    lib.imap0 (
+      idx: mon:
       let
         base = idx * 10;
       in
-      lib.imap1 (wsIdx: _:
+      lib.imap1 (
+        wsIdx: _:
         "${toString (base + wsIdx)}, monitor:${mon.name}${if wsIdx == 1 then ", default:true" else ""}"
       ) (lib.range 1 mon.workspaceCount)
     ) cfg.monitors
   );
 
-  explicitMonitorLines = lib.filter (mon: mon.resolution != null || mon.refreshRate != null) cfg.monitors;
+  explicitMonitorLines = lib.filter (
+    mon: mon.resolution != null || mon.refreshRate != null
+  ) cfg.monitors;
 
-  mkMonitorLine = mon:
+  mkMonitorLine =
+    mon:
     let
       res = if mon.resolution != null then mon.resolution else "highres";
       rate = if mon.refreshRate != null then "@${toString mon.refreshRate}" else "";
@@ -25,33 +30,35 @@ let
 in
 {
   options.omanix.monitors = lib.mkOption {
-    type = lib.types.listOf (lib.types.submodule {
-      options = {
-        name = lib.mkOption {
-          type = lib.types.str;
-          description = "Monitor name (e.g., DP-2, HDMI-A-1). Use `hyprctl monitors` to find yours.";
-          example = "DP-2";
+    type = lib.types.listOf (
+      lib.types.submodule {
+        options = {
+          name = lib.mkOption {
+            type = lib.types.str;
+            description = "Monitor name (e.g., DP-2, HDMI-A-1). Use `hyprctl monitors` to find yours.";
+            example = "DP-2";
+          };
+          resolution = lib.mkOption {
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+            description = "Override resolution (e.g., \"2560x1440\"). Null = use Hyprland preferred.";
+            example = "2560x1440";
+          };
+          refreshRate = lib.mkOption {
+            type = lib.types.nullOr lib.types.int;
+            default = null;
+            description = "Override refresh rate in Hz (e.g., 144). Null = use Hyprland preferred.";
+            example = 144;
+          };
+          workspaceCount = lib.mkOption {
+            type = lib.types.int;
+            default = 5;
+            description = "Number of workspaces for this monitor (default: 5).";
+          };
         };
-        resolution = lib.mkOption {
-          type = lib.types.nullOr lib.types.str;
-          default = null;
-          description = "Override resolution (e.g., \"2560x1440\"). Null = use Hyprland preferred.";
-          example = "2560x1440";
-        };
-        refreshRate = lib.mkOption {
-          type = lib.types.nullOr lib.types.int;
-          default = null;
-          description = "Override refresh rate in Hz (e.g., 144). Null = use Hyprland preferred.";
-          example = 144;
-        };
-        workspaceCount = lib.mkOption {
-          type = lib.types.int;
-          default = 5;
-          description = "Number of workspaces for this monitor (default: 5).";
-        };
-      };
-    });
-    default = [];
+      }
+    );
+    default = [ ];
     description = ''
       Configure monitors for workspace management and display settings.
       Each monitor gets its own set of workspaces (1-5 by default).
@@ -69,10 +76,10 @@ in
     '';
   };
 
-  config = lib.mkIf (cfg.monitors != []) {
+  config = lib.mkIf (cfg.monitors != [ ]) {
     wayland.windowManager.hyprland.settings = lib.mkMerge [
       { workspace = workspaceRules; }
-      (lib.mkIf (explicitMonitorLines != []) {
+      (lib.mkIf (explicitMonitorLines != [ ]) {
         monitor = map mkMonitorLine explicitMonitorLines;
       })
     ];

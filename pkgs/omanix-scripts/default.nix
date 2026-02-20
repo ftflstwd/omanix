@@ -56,11 +56,10 @@
 
 let
   # Helper: generate --set flags from an attrset, skipping null values
-  mkEnvFlags = envs:
+  mkEnvFlags =
+    envs:
     lib.concatStringsSep " " (
-      lib.mapAttrsToList (k: v:
-        if v != null then ''--set ${k} "${v}"'' else ""
-      ) envs
+      lib.mapAttrsToList (k: v: if v != null then ''--set ${k} "${v}"'' else "") envs
     );
 
   # ═══════════════════════════════════════════════════════════════════
@@ -71,38 +70,79 @@ let
   scripts = [
     {
       name = "omanix-launch-browser";
-      deps = [ bash xdg-utils ];
-      envs = { OMANIX_BROWSER_FALLBACK = browserFallback; };
+      deps = [
+        bash
+        xdg-utils
+      ];
+      envs = {
+        OMANIX_BROWSER_FALLBACK = browserFallback;
+      };
     }
     {
       name = "omanix-launch-or-focus";
-      deps = [ bash hyprland jq coreutils ];
+      deps = [
+        bash
+        hyprland
+        jq
+        coreutils
+      ];
     }
     {
       name = "omanix-launch-tui";
-      deps = [ bash ghostty coreutils ];
+      deps = [
+        bash
+        ghostty
+        coreutils
+      ];
     }
     {
       name = "omanix-launch-or-focus-tui";
-      deps = [ bash coreutils ];
+      deps = [
+        bash
+        coreutils
+      ];
       selfPath = true;
     }
     {
       name = "omanix-cmd-terminal-cwd";
-      deps = [ bash hyprland jq procps coreutils ];
+      deps = [
+        bash
+        hyprland
+        jq
+        procps
+        coreutils
+      ];
     }
     {
       name = "omanix-launch-walker";
-      deps = [ bash procps systemd coreutils ];
-      envs = { WALKER_BIN = "${walker}/bin/walker"; };
+      deps = [
+        bash
+        procps
+        systemd
+        coreutils
+      ];
+      envs = {
+        WALKER_BIN = "${walker}/bin/walker";
+      };
     }
     {
       name = "omanix-smart-delete";
-      deps = [ bash hyprland jq ];
+      deps = [
+        bash
+        hyprland
+        jq
+      ];
     }
     {
       name = "omanix-menu";
-      deps = [ bash coreutils hyprpicker libnotify systemd xdg-utils ];
+      deps = [
+        bash
+        coreutils
+        hyprpicker
+        libnotify
+        systemd
+        xdg-utils
+      ];
       envs = {
         WALKER_BIN = "${walker}/bin/walker";
         OMANIX_SCREENSAVER_LOGO = screensaverLogo;
@@ -111,7 +151,16 @@ let
     }
     {
       name = "omanix-menu-style";
-      deps = [ bash jq coreutils gnused envsubst swaybg ghostty glow ];
+      deps = [
+        bash
+        jq
+        coreutils
+        gnused
+        envsubst
+        swaybg
+        ghostty
+        glow
+      ];
       envs = {
         WALKER_BIN = "${walker}/bin/walker";
         OMANIX_THEMES_FILE = themesJson;
@@ -122,12 +171,26 @@ let
     }
     {
       name = "omanix-menu-keybindings";
-      deps = [ bash gawk libxkbcommon hyprland jq gnused coreutils ];
+      deps = [
+        bash
+        gawk
+        libxkbcommon
+        hyprland
+        jq
+        gnused
+        coreutils
+      ];
       selfPath = true;
     }
     {
       name = "omanix-show-style-help";
-      deps = [ bash coreutils gnused ghostty glow ];
+      deps = [
+        bash
+        coreutils
+        gnused
+        ghostty
+        glow
+      ];
       envs = {
         OMANIX_DOC_STYLE = docStyleGeneral;
         OMANIX_THEME_LIST = themeListFormatted;
@@ -135,22 +198,40 @@ let
     }
     {
       name = "omanix-show-setup-help";
-      deps = [ bash ghostty glow coreutils ];
+      deps = [
+        bash
+        ghostty
+        glow
+        coreutils
+      ];
       envs = {
         OMANIX_DOCS_DIR = docsDir;
       };
     }
     {
       name = "omanix-cmd-logout";
-      deps = [ bash hyprland jq coreutils ];
+      deps = [
+        bash
+        hyprland
+        jq
+        coreutils
+      ];
     }
     {
       name = "omanix-restart-walker";
-      deps = [ bash systemd libnotify coreutils ];
+      deps = [
+        bash
+        systemd
+        libnotify
+        coreutils
+      ];
     }
     {
       name = "omanix-launch-audio";
-      deps = [ bash pavucontrol ];
+      deps = [
+        bash
+        pavucontrol
+      ];
     }
     {
       name = "omanix-launch-wifi";
@@ -164,39 +245,92 @@ let
     }
     {
       name = "omanix-toggle-waybar";
-      deps = [ bash systemd ];
+      deps = [
+        bash
+        systemd
+      ];
     }
     {
       name = "omanix-cmd-screenshot";
-      deps = [ bash coreutils jq gawk procps hyprland grim slurp wl-clipboard wayfreeze libnotify ];
+      deps = [
+        bash
+        coreutils
+        jq
+        gawk
+        procps
+        hyprland
+        grim
+        slurp
+        wl-clipboard
+        wayfreeze
+        libnotify
+      ];
     }
     {
       name = "omanix-lock-screen";
-      deps = [ bash hyprland hyprlock libnotify bitwarden-cli procps ];
+      deps = [
+        bash
+        hyprland
+        hyprlock
+        libnotify
+        bitwarden-cli
+        procps
+      ];
     }
     {
       name = "omanix-cmd-shutdown";
-      deps = [ bash hyprland jq coreutils systemd ];
+      deps = [
+        bash
+        hyprland
+        jq
+        coreutils
+        systemd
+      ];
     }
     {
       name = "omanix-cmd-reboot";
-      deps = [ bash hyprland jq coreutils systemd ];
+      deps = [
+        bash
+        hyprland
+        jq
+        coreutils
+        systemd
+      ];
     }
     {
       name = "omanix-cmd-audio-switch";
-      deps = [ bash jq hyprland pulseaudio swayosd ];
+      deps = [
+        bash
+        jq
+        hyprland
+        pulseaudio
+        swayosd
+      ];
     }
     {
       name = "omanix-hyprland-window-close-all";
-      deps = [ bash hyprland jq coreutils ];
+      deps = [
+        bash
+        hyprland
+        jq
+        coreutils
+      ];
     }
     {
       name = "omanix-hyprland-window-pop";
-      deps = [ bash hyprland jq ];
+      deps = [
+        bash
+        hyprland
+        jq
+      ];
     }
     {
       name = "omanix-hyprland-workspace-toggle-gaps";
-      deps = [ bash hyprland jq ];
+      deps = [
+        bash
+        hyprland
+        jq
+      ];
       envs = {
         OMANIX_GAPS_OUTER = gapsOuter;
         OMANIX_GAPS_INNER = gapsInner;
@@ -205,36 +339,81 @@ let
     }
     {
       name = "omanix-theme-bg-next";
-      deps = [ bash coreutils swaybg libnotify procps ];
-      envs = { OMANIX_WALLPAPERS = wallpaperList; };
+      deps = [
+        bash
+        coreutils
+        swaybg
+        libnotify
+        procps
+      ];
+      envs = {
+        OMANIX_WALLPAPERS = wallpaperList;
+      };
     }
     {
       name = "omanix-toggle-idle";
-      deps = [ bash procps hypridle libnotify ];
+      deps = [
+        bash
+        procps
+        hypridle
+        libnotify
+      ];
     }
     {
       name = "omanix-cmd-screenrecord";
-      deps = [ bash coreutils jq gawk procps hyprland gpu-screen-recorder ffmpeg v4l-utils libnotify waybar wl-clipboard ];
+      deps = [
+        bash
+        coreutils
+        jq
+        gawk
+        procps
+        hyprland
+        gpu-screen-recorder
+        ffmpeg
+        v4l-utils
+        libnotify
+        waybar
+        wl-clipboard
+      ];
     }
     {
       name = "omanix-workspace";
-      deps = [ bash hyprland jq ];
-      envs = { OMANIX_MONITOR_MAP = monitorMap; };
+      deps = [
+        bash
+        hyprland
+        jq
+      ];
+      envs = {
+        OMANIX_MONITOR_MAP = monitorMap;
+      };
     }
     {
       name = "omanix-cmd-share";
-      deps = [ bash coreutils wl-clipboard libnotify systemd fzf localsend ];
+      deps = [
+        bash
+        coreutils
+        wl-clipboard
+        libnotify
+        systemd
+        fzf
+        localsend
+      ];
     }
   ];
 
   # ═══════════════════════════════════════════════════════════════════
   # Generate install commands for a single script
   # ═══════════════════════════════════════════════════════════════════
-  installScript = { name, deps, envs ? {}, selfPath ? false, ... }:
+  installScript =
+    {
+      name,
+      deps,
+      envs ? { },
+      selfPath ? false,
+      ...
+    }:
     let
-      binPath =
-        (lib.optionalString selfPath "$out/bin:") +
-        lib.makeBinPath deps;
+      binPath = (lib.optionalString selfPath "$out/bin:") + lib.makeBinPath deps;
 
       envFlags = mkEnvFlags envs;
     in
@@ -257,7 +436,8 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-  '' + lib.concatMapStringsSep "\n" installScript scripts;
+  ''
+  + lib.concatMapStringsSep "\n" installScript scripts;
 
   meta = with lib; {
     description = "Core logic scripts for Omanix desktop environment";

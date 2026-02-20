@@ -6,7 +6,7 @@ in
   options.omanix.hyprland = {
     extraWindowRules = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = ''
         Extra window rules appended to the Omanix defaults.
 
@@ -20,7 +20,7 @@ in
 
     extraLayerRules = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = ''
         Extra layer rules appended to the Omanix defaults.
 
@@ -185,7 +185,8 @@ in
         "center on, match:class ^(org.pulseaudio.pavucontrol)$"
         "size 875 600, match:class ^(org.pulseaudio.pavucontrol)$"
         "float on, match:class ^(xdg-desktop-portal-gtk)$"
-      ] ++ cfg.extraWindowRules;
+      ]
+      ++ cfg.extraWindowRules;
 
       # ═══════════════════════════════════════════════════════════════════
       # LAYER RULES
@@ -201,7 +202,8 @@ in
         "ignore_alpha 0.5, match:namespace waybar"
         "ignore_alpha 0.5, match:namespace wofi"
         "ignore_alpha 0.5, match:namespace notifications"
-      ] ++ cfg.extraLayerRules;
+      ]
+      ++ cfg.extraLayerRules;
     };
   };
 }
