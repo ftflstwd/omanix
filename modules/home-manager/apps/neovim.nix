@@ -117,5 +117,17 @@ in
     xdg.configFile."nvim/lua/plugins/init.lua".text = ''
       return {}
     '';
+
+    xdg.configFile."nvim/lua/plugins/snacks-explorer.lua".text = ''
+      return {
+        "folke/snacks.nvim",
+        opts = {
+          explorer = {
+            replace_netrw = true,
+            trash = false,
+          },
+        },
+      }
+    '';
   };
 }
