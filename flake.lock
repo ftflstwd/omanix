@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769544286,
-        "narHash": "sha256-tJzEPNC6fMCzF4W8h2YdnvjlI4TpRV/yJg9cTnbwkfc=",
+        "lastModified": 1771851181,
+        "narHash": "sha256-gFgE6mGUftwseV3DUENMb0k0EiHd739lZexPo5O/sdQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d505dc46dc9831d1db4e7d6e323b2c42d5eba3e6",
+        "rev": "9a4b494b1aa1b93d8edf167f46dc8e0c0011280c",
         "type": "github"
       },
       "original": {
@@ -568,11 +568,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1769170682,
-        "narHash": "sha256-oMmN1lVQU0F0W2k6OI3bgdzp2YOHWYUAw79qzDSjenU=",
+        "lastModified": 1771369470,
+        "narHash": "sha256-0NBlEBKkN3lufyvFegY4TYv5mCNHbi5OmBDrzihbBMQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c5296fdd05cfa2c187990dd909864da9658df755",
+        "rev": "0182a361324364ae3f436a63005877674cf45efb",
         "type": "github"
       },
       "original": {
@@ -658,11 +658,11 @@
     "spotatui": {
       "flake": false,
       "locked": {
-        "lastModified": 1770745678,
-        "narHash": "sha256-tYpDkxG3fn+tKbbd4+0QalURw4vSURpUYANKKu9bx2s=",
+        "lastModified": 1771851833,
+        "narHash": "sha256-ZJjvl42Dkrp90Oc+ZdIxFhLGkVvSWqPrraYemAhM9Lk=",
         "owner": "LargeModGames",
         "repo": "spotatui",
-        "rev": "05b5d7f86a023768f8d1c9841953038d45330230",
+        "rev": "b4eded6fe30c4cdfd0cbfe4a427801252609833e",
         "type": "github"
       },
       "original": {
@@ -740,11 +740,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1769093508,
-        "narHash": "sha256-ccwJ1ADGNFd5LDF2JWdfP7+f1Hs2EvJ+2o6sUOdYi7w=",
+        "lastModified": 1771062828,
+        "narHash": "sha256-y1jBFFO0u+V21y3YldHZozrDwVJVrdC+o3c4M8/rasU=",
         "owner": "abenz1267",
         "repo": "walker",
-        "rev": "e427025bdda667712b08dd56f1a0a23667f1364c",
+        "rev": "19b1104585305e0806b842af341630f72038a4b9",
         "type": "github"
       },
       "original": {
@@ -760,11 +760,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766888398,
-        "narHash": "sha256-XxLkWLKncv5tGejEQlVnLe8TSdXLe7QLLPKP9y/NhG4=",
+        "lastModified": 1771198963,
+        "narHash": "sha256-omeRIERhax7lmBYcjKm2Vp32yTKvnkOEAgMhRL4/uUY=",
         "owner": "aashish-thapa",
         "repo": "wlctl",
-        "rev": "7b2c5b014a59e663f4c415427cbcf341f6bccf25",
+        "rev": "29ce9d077c7df5e239230dc6f8da18c88590d364",
         "type": "github"
       },
       "original": {
